@@ -1,0 +1,257 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/D-9KpD0Dl0zgCebfSI6cD8B-uRY\"",
+ "discoveryVersion": "v1",
+ "id": "turning:v1",
+ "name": "turning",
+ "version": "v1",
+ "description": "API for turning grille cipher.",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://turning-grille.appspot.com/_ah/api/",
+ "rpcUrl": "https://turning-grille.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "CipherAndKey": {
+   "id": "CipherAndKey",
+   "type": "object",
+   "properties": {
+    "cipherText": {
+     "type": "string"
+    },
+    "key": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "format": "int32"
+     }
+    },
+    "keyMap": {
+     "$ref": "JsonMap"
+    }
+   }
+  },
+  "JsonMap": {
+   "id": "JsonMap",
+   "type": "object"
+  },
+  "Message": {
+   "id": "Message",
+   "type": "object",
+   "properties": {
+    "data": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "turning.decipher": {
+   "id": "turning.decipher",
+   "allowGet": true,
+   "parameters": {
+    "ciphertext": {
+     "type": "string",
+     "required": true
+    },
+    "grilleKey": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "repeated": true
+    }
+   },
+   "parameterOrder": [
+    "ciphertext",
+    "grilleKey"
+   ],
+   "returns": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "turning.generateDecipher": {
+   "id": "turning.generateDecipher",
+   "allowGet": true,
+   "parameters": {
+    "grilleKey": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "repeated": true
+    }
+   },
+   "parameterOrder": [
+    "grilleKey"
+   ],
+   "returns": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "turning.generateKey": {
+   "id": "turning.generateKey",
+   "allowGet": true,
+   "parameters": {
+    "n": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "n"
+   ],
+   "returns": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "turning.getCipherText": {
+   "id": "turning.getCipherText",
+   "allowGet": true,
+   "parameters": {
+    "plaintext": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "plaintext"
+   ],
+   "returns": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "turning.getCipherTextWithKey": {
+   "id": "turning.getCipherTextWithKey",
+   "allowGet": true,
+   "parameters": {
+    "plaintext": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "plaintext"
+   ],
+   "returns": {
+    "$ref": "CipherAndKey"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "turning.getN": {
+   "id": "turning.getN",
+   "allowGet": true,
+   "parameters": {
+    "plaintext": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "plaintext"
+   ],
+   "returns": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "turning.getRotations": {
+   "id": "turning.getRotations",
+   "allowGet": true,
+   "parameters": {
+    "n": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    },
+    "position": {
+     "type": "integer",
+     "required": true,
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "n",
+    "position"
+   ],
+   "returns": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

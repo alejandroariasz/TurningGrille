@@ -1,0 +1,275 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"zRMgE0l9nVDW4S28VYYcYQF9UW4/D-9KpD0Dl0zgCebfSI6cD8B-uRY\"",
+ "discoveryVersion": "v1",
+ "id": "turning:v1",
+ "name": "turning",
+ "version": "v1",
+ "description": "API for turning grille cipher.",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://turning-grille.appspot.com/_ah/api/turning/v1/",
+ "basePath": "/_ah/api/turning/v1/",
+ "rootUrl": "https://turning-grille.appspot.com/_ah/api/",
+ "servicePath": "turning/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "CipherAndKey": {
+   "id": "CipherAndKey",
+   "type": "object",
+   "properties": {
+    "cipherText": {
+     "type": "string"
+    },
+    "key": {
+     "type": "array",
+     "items": {
+      "type": "integer",
+      "format": "int32"
+     }
+    },
+    "keyMap": {
+     "$ref": "JsonMap"
+    }
+   }
+  },
+  "JsonMap": {
+   "id": "JsonMap",
+   "type": "object"
+  },
+  "Message": {
+   "id": "Message",
+   "type": "object",
+   "properties": {
+    "data": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "decipher": {
+   "id": "turning.decipher",
+   "path": "decipher",
+   "httpMethod": "GET",
+   "parameters": {
+    "ciphertext": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    },
+    "grilleKey": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "repeated": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "ciphertext",
+    "grilleKey"
+   ],
+   "response": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "generateDecipher": {
+   "id": "turning.generateDecipher",
+   "path": "generateDecipher",
+   "httpMethod": "GET",
+   "parameters": {
+    "grilleKey": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "repeated": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "grilleKey"
+   ],
+   "response": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "generateKey": {
+   "id": "turning.generateKey",
+   "path": "generateKey",
+   "httpMethod": "GET",
+   "parameters": {
+    "n": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "n"
+   ],
+   "response": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getCipherText": {
+   "id": "turning.getCipherText",
+   "path": "getCipherText",
+   "httpMethod": "GET",
+   "parameters": {
+    "plaintext": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "plaintext"
+   ],
+   "response": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getCipherTextWithKey": {
+   "id": "turning.getCipherTextWithKey",
+   "path": "getCipherTextWithKey",
+   "httpMethod": "GET",
+   "parameters": {
+    "plaintext": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "plaintext"
+   ],
+   "response": {
+    "$ref": "CipherAndKey"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getN": {
+   "id": "turning.getN",
+   "path": "getN",
+   "httpMethod": "GET",
+   "parameters": {
+    "plaintext": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "plaintext"
+   ],
+   "response": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getRotations": {
+   "id": "turning.getRotations",
+   "path": "getRotations",
+   "httpMethod": "GET",
+   "parameters": {
+    "n": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "location": "query"
+    },
+    "position": {
+     "type": "integer",
+     "required": true,
+     "format": "int32",
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "n",
+    "position"
+   ],
+   "response": {
+    "$ref": "Message"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}
